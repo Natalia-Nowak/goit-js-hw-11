@@ -45,7 +45,9 @@ searchForm.addEventListener('submit', e => {
         loadButton.style.visibility = 'visible';
       }
     })
-    .catch(e => {});
+    .catch(e => {
+      Notiflix.Notify.failure(`Error`);
+    });
 });
 
 loadButton.addEventListener('click', e => {
