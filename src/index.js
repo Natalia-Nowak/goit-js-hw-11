@@ -7,12 +7,16 @@ const searchForm = document.querySelector('#search-form');
 const searchQuery = document.querySelector('[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadButton = document.querySelector('.load-more');
+const loadBlock = document.querySelector('.load-block');
 
 let searchText = '';
 let currentPage = 1;
 let lightBox;
 
 loadButton.style.visibility = 'hidden';
+loadBlock.style.textAlign = 'center';
+loadBlock.style.margin = '50px';
+loadBlock.style.fontSize = '20px';
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -38,7 +42,7 @@ searchForm.addEventListener('submit', e => {
 
       drawImages(response.data.hits);
 
-      lightbox = new SimpleLightbox('.gallery a', {});
+      lightBox = new SimpleLightbox('.gallery a', {});
       if (currentPage * 40 >= response.data.totalHits) {
         loadButton.style.visibility = 'hidden';
       } else {
@@ -54,7 +58,7 @@ loadButton.addEventListener('click', e => {
   currentPage = currentPage + 1;
   searchPics(searchText, currentPage).then(response => {
     drawImages(response.data.hits);
-    lightbox.refresh();
+    lightBox.refresh();
     if (currentPage * 40 >= response.data.totalHits) {
       loadButton.style.visibility = 'hidden';
       Notiflix.Notify.failure(
